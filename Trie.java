@@ -56,7 +56,7 @@ public class Trie {
         }
     }
 
-    // Удаление слова (с корректным освобождением узлов)
+    // Удаление слова 
     public void delete(String word) {
         if (word == null || !contains(word)) return;
         deleteHelper(root, word, 0);
@@ -65,9 +65,9 @@ public class Trie {
 
     private boolean deleteHelper(TrieNode node, String word, int index) {
         if (index == word.length()) {
-            if (!node.isEndOfWord) return false; // такого слова нет
+            if (!node.isEndOfWord) return false; 
             node.isEndOfWord = false;
-            return node.prefixCount == 0; // можно ли удалить?
+            return node.prefixCount == 0; 
         }
 
         char c = word.charAt(index);
@@ -79,11 +79,8 @@ public class Trie {
 
         if (shouldDeleteChild) {
             node.children[idx] = null;
-            child.prefixCount--; // на самом деле уже не нужно, но для логики
+            child.prefixCount--; 
         }
-
-        // узел можно удалить, если он не является концом другого слова
-        // и у него нет других детей
         return !node.isEndOfWord && hasNoChildren(node);
     }
 
@@ -130,12 +127,11 @@ public class Trie {
         return wordCount;
     }
 
-    // Пусто ли дерево?
     public boolean isEmpty() {
         return wordCount == 0;
     }
 
-    // Вспомогательные методы
+
 
     private TrieNode searchNode(String str) {
         TrieNode current = root;
